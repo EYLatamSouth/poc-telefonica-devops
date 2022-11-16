@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  jenkins:
+    build: ./solution/jenkins
+    init: true
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - poc-telefonica-network
+    volumes:
+      - jenkins-data:/var/jenkins_home
+
+  nexus3:
+    build: ./solution/nexus3
+    init: true
+    restart: always
+    ports:
+      - 8081:8081
+    networks:
+      - poc-telefonica-network
+    volumes:
+      - nexus-data:/nexus-data
+
+networks:
+  poc-telefonica-network:
+    driver: bridge
+
+volumes:
+  jenkins-data:
+  nexus-data:
